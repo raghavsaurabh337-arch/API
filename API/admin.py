@@ -1,6 +1,6 @@
 from django.contrib import admin
 # from .models import login_model
-from .models import create_model,student,employee
+from .models import create_model,student,employee,school_library
 
 # # Register your models here.
 admin.site.register(create_model)

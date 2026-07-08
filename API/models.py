@@ -15,3 +15,9 @@ class employee(models.Model):
      salary=models.DecimalField(max_digits=10, decimal_places=2)
      villege=models.CharField(max_length=50)
      Department=models.CharField(max_length=10)
+class school_library(models.Model):
+     name=models.CharField(max_length=100)
+     course=models.CharField(max_length=10)
+     book_no=models.IntegerField()
+     bookName=models.CharField(max_length=100)
+     address=models.CharField(max_length=200)

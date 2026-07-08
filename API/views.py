@@ -1,10 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import create_model,student,employee
-from .serializers import create_userSerializers, studentSerializers,employeeSerializers
+from .models import create_model,student,employee,school_library
+from .serializers import create_userSerializers, studentSerializers,employeeSerializers,school_librarySerializers
 from rest_framework.mixins import ListModelMixin,CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,DestroyModelMixin
 from rest_framework.generics import GenericAPIView , ListCreateAPIView,RetrieveUpdateDestroyAPIView
-
+from rest_framework import viewsets
+ #APIView
 class AuthAPIView(APIView):
 
     # Register
@@ -34,6 +35,11 @@ class AuthAPIView(APIView):
             return Response({"message": "Invalid Email or Password"})
         
 
+
+
+
+        
+#  GenericAPIView + Mixins class based
 class studentList(GenericAPIView,ListModelMixin,CreateModelMixin):
     queryset=student.objects.all()
     serializer_class=studentSerializers
@@ -52,9 +58,22 @@ class studentRUD(GenericAPIView,RetrieveModelMixin,UpdateModelMixin,DestroyModel
         return self.destroy(request,*args,**kwargs)
 
 
-class employeeLC(ListCreateAPIView):
+
+
+
+# Generic Class only /GenericAPIView /ConcreteView
+class employeeLC(ListCreateAPIView):     
     queryset=employee.objects.all()
     serializer_class=employeeSerializers
 class employeeRUD(RetrieveUpdateDestroyAPIView):
     queryset=employee.objects.all()
     serializer_class=employeeSerializers
+
+
+
+
+# ModelViewSet API create
+# 
+class school_libraryModelview(viewsets.ModelViewSet):
+    queryset=school_library.objects.all()
+    serializer_class=school_librarySerializers

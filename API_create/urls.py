@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path ,include
 from API import views
-from API.views import studentList,AuthAPIView
-# from rest_framework.routers import DefaultRouter
-# router=DefaultRouter()
-# router.register('user', views.studentList, basename='user')
+from API.views import studentList,AuthAPIView,school_libraryModelview
+
+from rest_framework.routers import DefaultRouter
+router=DefaultRouter()
+router.register('school', views.school_libraryModelview, basename='school')
 
 
 urlpatterns = [
@@ -31,4 +32,5 @@ urlpatterns = [
     path('studentApi/<int:pk>/',views.studentRUD.as_view(),name='student'),
     path('employeeApi/',views.employeeLC.as_view(),name='employee'),
     path('employeeApi/<int:pk>/',views.employeeRUD.as_view(),name='employee'),
+    path('schoolApi/', include(router.urls)),
 ]
