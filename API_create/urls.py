@@ -17,11 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path ,include
 from API import views
-from API.views import studentList,AuthAPIView,school_libraryModelview
+from API.views import studentList,AuthAPIView,school_libraryModelview,employeeLC
 
 from rest_framework.routers import DefaultRouter
-router=DefaultRouter()
-router.register('school', views.school_libraryModelview, basename='school')
+# router=DefaultRouter()
+# router.register('school', views.school_libraryModelview, basename='school')
+
+route=DefaultRouter()
+route.register('emp', views.employeeLC, basename='emp')
+
 
 
 urlpatterns = [
@@ -30,7 +34,8 @@ urlpatterns = [
     path('userApi/',AuthAPIView.as_view(),name='user'),
     path('studentApi/',views.studentList.as_view(),name='student'),
     path('studentApi/<int:pk>/',views.studentRUD.as_view(),name='student'),
-    path('employeeApi/',views.employeeLC.as_view(),name='employee'),
-    path('employeeApi/<int:pk>/',views.employeeRUD.as_view(),name='employee'),
-    path('schoolApi/', include(router.urls)),
+    # path('employeeApi/',views.employeeLC.as_view(),name='employee'),
+    # path('employeeApi/<int:pk>/',views.employeeRUD.as_view(),name='employee'),
+    path('schoolApi/', include('rest_framework.urls')),
+    path('school/', include('rest_framework.urls')),
 ]

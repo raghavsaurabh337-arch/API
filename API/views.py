@@ -5,6 +5,8 @@ from .serializers import create_userSerializers, studentSerializers,employeeSeri
 from rest_framework.mixins import ListModelMixin,CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,DestroyModelMixin
 from rest_framework.generics import GenericAPIView , ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAdminUser
  #APIView
 class AuthAPIView(APIView):
 
@@ -68,6 +70,7 @@ class employeeLC(ListCreateAPIView):
 class employeeRUD(RetrieveUpdateDestroyAPIView):
     queryset=employee.objects.all()
     serializer_class=employeeSerializers
+    
 
 
 
@@ -77,3 +80,5 @@ class employeeRUD(RetrieveUpdateDestroyAPIView):
 class school_libraryModelview(viewsets.ModelViewSet):
     queryset=school_library.objects.all()
     serializer_class=school_librarySerializers
+    authentication_classes=[SessionAuthentication]
+    permission_classes=[IsAdminUser]
