@@ -1,6 +1,6 @@
 from django.contrib import admin
 # from .models import login_model
-from .models import create_model,student,employee,school_library
+from .models import create_model,student,employee,school_library,product
 
 # # Register your models here.
 admin.site.register(create_model)
@@ -17,6 +17,13 @@ class student(admin.ModelAdmin):
 class employee(admin.ModelAdmin):
      list_display=['name','salary','villege','Department']
 class school_library(admin.ModelAdmin):
-     list_displya=['name','course','book_no','bookName','address']     
+     list_displya=['name','course','book_no','bookName','address']
+
+     
+admin.site.register(product)
+class product(admin.ModelAdmin):
+     list_display=['name','price','description','stock','image']
+
+
 
  

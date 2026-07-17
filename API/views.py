@@ -1,12 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import create_model,student,employee,school_library
-from .serializers import create_userSerializers, studentSerializers,employeeSerializers,school_librarySerializers
+from .models import create_model,student,employee,school_library,product
+from .serializers import create_userSerializers, studentSerializers,employeeSerializers,school_librarySerializers,productSerializers
 from rest_framework.mixins import ListModelMixin,CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,DestroyModelMixin
 from rest_framework.generics import GenericAPIView , ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser,AllowAny
  #APIView
 class AuthAPIView(APIView):
 
@@ -82,3 +82,9 @@ class school_libraryModelview(viewsets.ModelViewSet):
     serializer_class=school_librarySerializers
     authentication_classes=[SessionAuthentication]
     permission_classes=[IsAdminUser]
+
+class productAPI(viewsets.ModelViewSet):
+    queryset=product.objects.all()
+    serializer_class=productSerializers
+    authentication_classes=[SessionAuthentication]
+    permission_classes=[AllowAny]
