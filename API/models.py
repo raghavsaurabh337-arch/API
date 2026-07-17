@@ -28,4 +28,8 @@ class product(models.Model):
      description = models.TextField()
      stock = models.PositiveIntegerField(default=0)
      image = models.ImageField(upload_to='products/')
+
+     def __str__(self):
+          return self.name
+     
      

@@ -22,6 +22,8 @@ from API.views import studentList,AuthAPIView,school_libraryModelview,employeeLC
 from rest_framework.routers import DefaultRouter
 router=DefaultRouter()
 router.register('school', views.school_libraryModelview, basename='school')
+router=DefaultRouter()
+router.register('product', views.productAPI, basename='product')
 
 
 
@@ -37,5 +39,10 @@ urlpatterns = [
     path('schoolApi/', include(router.urls)),
     path('schoolApi/<int:pk>/', include(router.urls)),
     path('schoolApi/',include('rest_framework.urls')),
+    path('productApi/', include(router.urls)),
+    path('productApi/<int:pk>/', include(router.urls)),
+    path('productApi/',include('rest_framework.urls')),
+
+
     
 ]
