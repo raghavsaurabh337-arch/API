@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Model
+from django.core.validators import MaxLengthValidator,MinLengthValidator
 
 # Create your models here.
 class create_model(models.Model):     
@@ -31,5 +33,19 @@ class product(models.Model):
 
      def __str__(self):
           return self.name
-     
-     
+
+class library(models.Model):
+     name=models.CharField(max_length=100)
+     addmission_no=models.IntegerField(primary_key=True)
+     bookName=models.CharField(max_length=100)
+     course=models.CharField(max_length=100)
+     bookid=models.IntegerField(unique=True,
+          validators=[
+               MinLengthValidator(100000),
+               MaxLengthValidator(999999)
+          ]          ),
+
+     def __str__(self):
+          return self.name
+ 
+  

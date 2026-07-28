@@ -1,12 +1,16 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import create_model,student,employee,school_library,product
-from .serializers import create_userSerializers, studentSerializers,employeeSerializers,school_librarySerializers,productSerializers
+from .models import create_model,student,employee,school_library,product,library
+from .serializers import create_userSerializers, studentSerializers,employeeSerializers,school_librarySerializers,productSerializers,librarySerializers
 from rest_framework.mixins import ListModelMixin,CreateModelMixin,RetrieveModelMixin,UpdateModelMixin,DestroyModelMixin
 from rest_framework.generics import GenericAPIView , ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAdminUser,AllowAny
+from django.shortcuts import render,redirect
+def home(request):
+    pro=product.objects.all()
+    return render(request, 'home.html')
  #APIView
 class AuthAPIView(APIView):
 
@@ -54,6 +58,8 @@ class studentRUD(GenericAPIView,RetrieveModelMixin,UpdateModelMixin,DestroyModel
     serializer_class=studentSerializers
     def get(self,request,*args,**kwargs):
         return self.retrieve(request,*args,**kwargs)
+    def create(self,request,*args,**kwargs):
+        return self.create(request,*args,**kwargs)
     def put(self,request,*args,**kwargs):
         return self.update(request,*args,**kwargs)
     def delete(self,request,*args,**kwargs):
@@ -63,7 +69,7 @@ class studentRUD(GenericAPIView,RetrieveModelMixin,UpdateModelMixin,DestroyModel
 
 
 
-# Generic Class only /GenericAPIView /ConcreteView
+# Generic Class only / GenericAPIView /ConcreteView
 class employeeLC(ListCreateAPIView):     
     queryset=employee.objects.all()
     serializer_class=employeeSerializers
@@ -88,3 +94,22 @@ class productAPI(viewsets.ModelViewSet):
     serializer_class=productSerializers
     authentication_classes=[SessionAuthentication]
     permission_classes=[AllowAny]
+
+# class libraryAPI(GenericAPIView,ListModelMixin):
+#     queryset=library.objects.all()
+#     serializer_class=librarySerializers
+#     def get(self,request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+class libraryRUD(GenericAPIView,ListModelMixin, CreateModelMixin,RetrieveModelMixin,DestroyModelMixin,UpdateModelMixin):
+    queryset=library.objects.all()
+    serializer_class=librarySerializers
+    def get(self,request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)    
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)

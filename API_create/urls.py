@@ -17,19 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path ,include
 from API import views
-from API.views import studentList,AuthAPIView,school_libraryModelview,employeeLC
+from API.views import studentList,AuthAPIView,school_libraryModelview,employeeLC,libraryRUD
 
 from rest_framework.routers import DefaultRouter
 router=DefaultRouter()
 router.register('school', views.school_libraryModelview, basename='school')
-router=DefaultRouter()
+
 router.register('product', views.productAPI, basename='product')
+# router.register('library',views.libraryRUD,basename='library')
 
 
 
 
 
 urlpatterns = [
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('userApi/',AuthAPIView.as_view(),name='user'),
     path('studentApi/',views.studentList.as_view(),name='student'),
@@ -37,11 +39,13 @@ urlpatterns = [
     path('employeeApi/',views.employeeLC.as_view(),name='employee'),
     path('employeeApi/<int:pk>/',views.employeeRUD.as_view(),name='employee'),
     path('schoolApi/', include(router.urls)),
-    path('schoolApi/<int:pk>/', include(router.urls)),
-    path('schoolApi/',include('rest_framework.urls')),
-    path('productApi/', include(router.urls)),
-    path('productApi/<int:pk>/', include(router.urls)),
-    path('productApi/',include('rest_framework.urls')),
+    path('libraryApi/', views.libraryRUD.as_view,name='library'),
+   
+    # path('schoolApi/',include('rest_framework.urls')),
+    # path('productApi/', include(router.urls)),
+    # path('productApi/',include('rest_framework.urls')),
+    path('home/',views.home,name='home'),
+
 
 
     

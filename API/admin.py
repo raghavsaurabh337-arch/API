@@ -1,6 +1,6 @@
 from django.contrib import admin
 # from .models import login_model
-from .models import create_model,student,employee,school_library,product
+from .models import create_model,student,employee,school_library,product,library
 
 # # Register your models here.
 admin.site.register(create_model)
@@ -24,6 +24,9 @@ admin.site.register(product)
 class product(admin.ModelAdmin):
      list_display=['name','price','description','stock','image']
 
+admin.site.register(library)
+class library(admin.ModelAdmin):
+     list_display=['name','addmission_no','bookName','course','bookid']
 
 
  

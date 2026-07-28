@@ -1,4 +1,4 @@
-from .models import create_model,student,employee,school_library,product
+from .models import create_model,student,employee,school_library,product,library
 from rest_framework import serializers
 
 class create_userSerializers(serializers.ModelSerializer):
@@ -23,3 +23,9 @@ class productSerializers(serializers.ModelSerializer):
      class Meta:
           model = product
           fields = '__all__'
+
+class librarySerializers(serializers.ModelSerializer):
+     class Meta:
+          model = library
+          fields = '__all__'
+     
