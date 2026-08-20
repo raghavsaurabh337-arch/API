@@ -41,9 +41,9 @@ urlpatterns = [
     path('schoolApi/', include(router.urls)),
     path('libraryApi/', views.libraryRUD.as_view,name='library'),
    
-    # path('schoolApi/',include('rest_framework.urls')),
-    # path('productApi/', include(router.urls)),
-    # path('productApi/',include('rest_framework.urls')),
+    path('schoolApi/',include('rest_framework.urls')),
+    path('productApi/', include(router.urls)),
+    path('productApi/',include('rest_framework.urls')),
     path('home/',views.home,name='home'),
 
 
