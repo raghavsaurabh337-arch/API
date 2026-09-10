@@ -95,11 +95,7 @@ class productAPI(viewsets.ModelViewSet):
     authentication_classes=[SessionAuthentication]
     permission_classes=[AllowAny]
 
-# class libraryAPI(GenericAPIView,ListModelMixin):
-#     queryset=library.objects.all()
-#     serializer_class=librarySerializers
-#     def get(self,request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
+
 class libraryRUD(GenericAPIView,ListModelMixin, CreateModelMixin,RetrieveModelMixin,DestroyModelMixin,UpdateModelMixin):
     queryset=library.objects.all()
     serializer_class=librarySerializers
@@ -107,8 +103,6 @@ class libraryRUD(GenericAPIView,ListModelMixin, CreateModelMixin,RetrieveModelMi
         return self.list(request, *args, **kwargs)
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)    
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
     def delete(self, request, *args, **kwargs):

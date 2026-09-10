@@ -39,7 +39,7 @@ urlpatterns = [
     path('employeeApi/',views.employeeLC.as_view(),name='employee'),
     path('employeeApi/<int:pk>/',views.employeeRUD.as_view(),name='employee'),
     path('schoolApi/', include(router.urls)),
-    path('libraryApi/', views.libraryRUD.as_view,name='library'),
+    path('libraryApi/', views.libraryRUD.as_view(),name='library'),
    
     path('schoolApi/',include('rest_framework.urls')),
     path('productApi/', include(router.urls)),
